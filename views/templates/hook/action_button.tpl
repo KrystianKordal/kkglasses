@@ -1,0 +1,1 @@
+<a href="{$button_url}" class="btn btn-primary">{l s="Wybierz soczewki" d="Modules.Kkglasses.Product"}</a>
