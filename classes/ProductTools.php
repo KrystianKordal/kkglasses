@@ -57,8 +57,24 @@ class ProductTools
     public static function getCustomizationFields($id_product)
     {
         $product = new Product($id_product);
+        $id_lang = Context::getContext()->language->id;
         
         $customization_fields = $product->getCustomizationFields();
-        print_r(array_shift($customization_fields));
+        $customization_fields = array_shift($customization_fields);
+
+        $result = array();
+
+        $indexes = ['correction', 'spacing'];
+        $current_index = 0;
+        foreach($customization_fields as $id_field => $field) {
+            $result[$indexes[$current_index]] = $field[$id_lang]['id_customization_field'];
+
+            $current_index++;
+            if($current_index > count($indexes) - 1) {
+                break;
+            }
+        }
+
+        return $result;
     }
 }
