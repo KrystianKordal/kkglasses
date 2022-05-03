@@ -24,11 +24,20 @@ class ProductTools
         $attributes_groups = $product->getAttributesGroups($context->language->id);
 
         foreach($attributes_groups as $attribute_group) {
-            if(!isset($attributes[$attribute_group['id_attribute_group']])) {
-                $attributes[$attribute_group['id_attribute_group']] = array();
+            $id_group = $attribute_group['id_attribute_group'];
+            if(!in_array($id_group, [
+                Configuration::get('KKGLASSES_ATTR_USE', 0),
+                Configuration::get('KKGLASSES_ATTR_TYPE', 0),
+                Configuration::get('KKGLASSES_ATTR_THIN', 0),
+            ])) {
+                continue;
             }
-            $attributes[$attribute_group['id_attribute_group']]['name'] = $attribute_group['group_name'];
-            $attributes[$attribute_group['id_attribute_group']]['values'][$attribute_group['id_attribute']] = array(
+
+            if(!isset($attributes[$id_group])) {
+                $attributes[$id_group] = array();
+            }
+            $attributes[$id_group]['name'] = $attribute_group['group_name'];
+            $attributes[$id_group]['values'][$attribute_group['id_attribute']] = array(
                 'name' => $attribute_group['attribute_name']
             );
         }

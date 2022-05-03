@@ -73,11 +73,7 @@ class Kkglasses extends Module
             $this->postProcess();
         }
 
-        $this->context->smarty->assign('module_dir', $this->_path);
-
-        $output = $this->context->smarty->fetch($this->local_path.'views/templates/admin/configure.tpl');
-
-        return $output.$this->renderForm();
+        return $this->renderForm();
     }
 
     protected function renderForm()
@@ -110,41 +106,27 @@ class Kkglasses extends Module
         return array(
             'form' => array(
                 'legend' => array(
-                'title' => $this->l('Settings'),
+                'title' => $this->l('Ustawienia atrybutów'),
                 'icon' => 'icon-cogs',
                 ),
                 'input' => array(
                     array(
-                        'type' => 'switch',
-                        'label' => $this->l('Live mode'),
-                        'name' => 'KKGLASSES_LIVE_MODE',
-                        'is_bool' => true,
-                        'desc' => $this->l('Use this module in live mode'),
-                        'values' => array(
-                            array(
-                                'id' => 'active_on',
-                                'value' => true,
-                                'label' => $this->l('Enabled')
-                            ),
-                            array(
-                                'id' => 'active_off',
-                                'value' => false,
-                                'label' => $this->l('Disabled')
-                            )
-                        ),
-                    ),
-                    array(
-                        'col' => 3,
+                        'col' => 2,
                         'type' => 'text',
-                        'prefix' => '<i class="icon icon-envelope"></i>',
-                        'desc' => $this->l('Enter a valid email address'),
-                        'name' => 'KKGLASSES_ACCOUNT_EMAIL',
-                        'label' => $this->l('Email'),
+                        'name' => 'KKGLASSES_ATTR_USE',
+                        'label' => $this->l('ID atrybutu dla zastosowania soczewek'),
                     ),
                     array(
-                        'type' => 'password',
-                        'name' => 'KKGLASSES_ACCOUNT_PASSWORD',
-                        'label' => $this->l('Password'),
+                        'col' => 2,
+                        'type' => 'text',
+                        'name' => 'KKGLASSES_ATTR_TYPE',
+                        'label' => $this->l('ID atrybutu dla typu soczewek'),
+                    ),
+                    array(
+                        'col' => 2,
+                        'type' => 'text',
+                        'name' => 'KKGLASSES_ATTR_THIN',
+                        'label' => $this->l('ID atrybutu dla przycienienia soczewek'),
                     ),
                 ),
                 'submit' => array(
@@ -157,9 +139,9 @@ class Kkglasses extends Module
     protected function getConfigFormValues()
     {
         return array(
-            'KKGLASSES_LIVE_MODE' => Configuration::get('KKGLASSES_LIVE_MODE', true),
-            'KKGLASSES_ACCOUNT_EMAIL' => Configuration::get('KKGLASSES_ACCOUNT_EMAIL', 'contact@prestashop.com'),
-            'KKGLASSES_ACCOUNT_PASSWORD' => Configuration::get('KKGLASSES_ACCOUNT_PASSWORD', null),
+            'KKGLASSES_ATTR_USE' => Configuration::get('KKGLASSES_ATTR_USE', ''),
+            'KKGLASSES_ATTR_TYPE' => Configuration::get('KKGLASSES_ATTR_TYPE', ''),
+            'KKGLASSES_ATTR_THIN' => Configuration::get('KKGLASSES_ATTR_THIN', ''),
         );
     }
 
@@ -176,7 +158,6 @@ class Kkglasses extends Module
     {
         $this->context->smarty->assign([
             'button_url' => $this->context->link->getModuleLink('kkglasses', 'creator', ['id_product' => $params['product']->id])
-            
         ]);
         return $this->display(__FILE__, 'action_button.tpl');
     }
