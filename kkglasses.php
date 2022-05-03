@@ -192,7 +192,8 @@ class Kkglasses extends Module
             Media::addJsDef([
                 'product_attributes' => ProductTools::getProductAttributes($id_product),
                 'id_product' => $id_product,
-                'customization_fields' => ProductTools::getCustomizationFields($id_product)
+                'customization_fields' => ProductTools::getCustomizationFields($id_product),
+                'customization_ajax' => $this->context->link->getModuleLink($this->name, 'customization', ['ajax' => true])
             ]);
 
             $this->context->controller->addJS($this->_path.'/views/js/addtocart.js');

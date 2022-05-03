@@ -1,66 +1,101 @@
 $(document).ready(function() {
     if($("#module-kkglasses-creator").length) {
         $("#add_to_cart").on("click", function(e) {
-            $('.conditions-error').hide();
-            if($('#conditions').prop('checked')) {
-                addToCart();
-            } else {
-                $('.conditions-error').show();
-            }
+            createCustomization().then(res => {
+                getCustomizationId().then(res => {
+                    addToCart(res.id_customization);
+                })
+            })
         });
     }
 });
 
-function createCustomization() {
-    let correction_str = getCorrectionStr();
-    let spacing_str = getSpacingStr();
-
-    let data = {
-        id_product: id_product,
-        id_product_attribute: 0,   
-        id_customization: 0,
-        submitCustomizedData: 1,
-        token: $('input[name=token]').val()
+function addToCart(id_customization) {
+    if(validateForm()) {
+        let data = getAddToCartData(id_customization);
+        $.ajax({
+            'url': 'http://ps78.local/index.php?controller=cart',
+            data: data
+        });
     }
-
-    data[`textField${customization_fields.correction}`] = correction_str;
-    data[`textField${customization_fields.spacing}`] = spacing_str;
-
-    $.ajax({
-        url: 'http://ps78.local/index.php?controller=product',
-        method: 'POST',
-        dataType: 'json',
-        data: data
-    });
 }
 
-function addToCart() {
-    let application_id = $('input[name="group[8]"]:checked').val();
-    let type_id = $('input[name="group[9]"]:checked').val();
-    let thickness_id = $('input[name="group[10]"]:checked').val();
+function validateForm() {
+    let validForm = true;
 
-    let group = {
-        8: application_id,
-        9: type_id,
-        10: thickness_id
-    };
+    $('.conditions-error').hide();
+    if(!$('#conditions').prop('checked')) {
+        $('.conditions-error').show();
+        validForm = false;
+    }
 
-    createCustomization();
+    return validForm;
+}
 
-    $.ajax({
-        'url': 'http://ps78.local/index.php?controller=cart',
-        method: 'POST',
-        dataType: 'json',
-        data: {
+function getAddToCartData(id_customization) {
+        let application_id = $('input[name="group[8]"]:checked').val();
+        let type_id = $('input[name="group[9]"]:checked').val();
+        let thickness_id = $('input[name="group[10]"]:checked').val();
+    
+        let group = {
+            8: application_id,
+            9: type_id,
+            10: thickness_id
+        };
+
+        return {
             id_product: id_product,
-            id_customization: 0,
+            id_customization: id_customization,
             group: group,
             qty: 1,
             add: 1,
             action: 'update',
             token: $('input[name=token]').val()
-        }
+        };
+}
+
+function createCustomization() {
+    return new Promise((resolve) => {
+        $.ajax({
+            method: 'POST',
+            url: 'http://ps78.local/index.php?controller=product',
+            data: getCreateCustomizationData(),
+        }).done(function(res) {
+            resolve(res);
+        });
     });
+}
+
+function getCustomizationId() {
+    return new Promise( resolve => {
+        $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            url: customization_ajax,
+            data: {
+                id_product: id_product
+            }
+        }).done(function(res) {
+            resolve(res.id_customization);
+        });
+    });
+}
+
+function getCreateCustomizationData() {
+    let data = {
+        id_product: id_product,
+        id_product_attribute: 0,   
+        submitCustomizedData: 1,
+        token: $('input[name=token]').val()
+    }
+
+    let correction_str = getCorrectionStr();
+    let spacing_str = getSpacingStr();
+
+    data[`textField${customization_fields.correction}`] = correction_str;
+    data[`textField${customization_fields.spacing}`] = spacing_str;
+
+    return data;
 }
 
 function getCorrectionStr() {
