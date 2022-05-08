@@ -113,8 +113,8 @@ function getCorrectionStr() {
 }
 
 function getSpacingStr() {
-    let spacing_r = $('#pd_p');
-    let spacing_l = $('#pd_l');
+    let spacing_r = $('#pd_p').val();
+    let spacing_l = $('#pd_l').val();
 
     return `Oko prawe: ${spacing_r}, Oko lewe: ${spacing_l}`;
 }

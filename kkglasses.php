@@ -178,10 +178,8 @@ class Kkglasses extends Module
             ]);
 
             $this->context->controller->addJS($this->_path.'/views/js/addtocart.js');
+            $this->context->controller->addJS($this->_path.'/views/js/creator.js');
             $this->context->controller->addCSS($this->_path.'/views/css/creator.css');
         }
-
-        $this->context->controller->addJS($this->_path.'/views/js/kkglasses.js');
-        $this->context->controller->addCSS($this->_path.'/views/css/kkglasses.css');
     }
 }

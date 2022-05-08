@@ -1,25 +1,25 @@
 <h2>{l s="3. Rozstaw źrenic (PD)" d="Modules.KkGlasses.Creator"}</h2>
-<div>
+<div class="kkglasses-spacing">
+    <div class="spacing-radio">
     <div>
-    <p>
-        <input type="radio" id="same_spacing">
+        <input type="radio" id="same_spacing" name="spacing_type" checked>
         <label for="same_spacing">{l s="PD TAKIE SAMO DLA OBU OCZU" d="Modules.KkGlasses.Creator"}</label>
-    </p>
-    <p>
-        <input type="radio" id="different_spacing">
-        <label for="same_spacing">{l s="PD RÓŻNE DLA OBU OCZU" d="Modules.KkGlasses.Creator"}</label>
-    </p>
     </div>
     <div>
+        <input type="radio" id="different_spacing" name="spacing_type">
+        <label for="different_spacing">{l s="PD RÓŻNE DLA OBU OCZU" d="Modules.KkGlasses.Creator"}</label>
+    </div>
+    </div>
+    <div id="same_spacing_container" class="spacing-input-container">
         <input type="number" step="0.01" id="pd_same">
     </div>
-    <div>
+    <div id="different_spacing_container" class="spacing-input-container">
         <p>
-            <label for="pd_r">{l s="lewe" d="Modules.KkGlasses.Creator"}</label>
+            <label for="pd_r">{l s="lewe:" d="Modules.KkGlasses.Creator"}</label>
             <input type="number" step="0.01" id="pd_l">
         </p>
         <p>
-            <label for="pd_r">{l s="lewe" d="Modules.KkGlasses.Creator"}</label>
+            <label for="pd_r">{l s="prawe:" d="Modules.KkGlasses.Creator"}</label>
             <input type="number" step="0.01" id="pd_p">
         </p>
     </div>

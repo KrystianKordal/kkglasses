@@ -69,6 +69,9 @@ class ProductTools
         $id_lang = Context::getContext()->language->id;
         
         $customization_fields = $product->getCustomizationFields();
+        if(!$customization_fields) {
+            return array();
+        }
         $customization_fields = array_shift($customization_fields);
 
         $result = array();
