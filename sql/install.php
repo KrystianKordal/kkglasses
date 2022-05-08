@@ -30,6 +30,13 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'kkglasses` (
     PRIMARY KEY  (`id_kkglasses`)
 ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
+$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'kkglasses_product` ( 
+    `id_product` INT NOT NULL , 
+    `id_creator_product` INT NOT NULL , 
+    `type_data` TEXT NOT NULL , 
+    `thin_data` INT NOT NULL 
+) ENGINE =' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
         return false;

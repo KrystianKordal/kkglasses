@@ -38,7 +38,7 @@ class ProductTools
             }
             $attributes[$id_group]['name'] = $attribute_group['group_name'];
             $attributes[$id_group]['values'][$attribute_group['id_attribute']] = array(
-                'name' => $attribute_group['attribute_name']
+                'name' => $attribute_group['attribute_name'],
             );
         }
 
@@ -52,7 +52,6 @@ class ProductTools
         $product_attributes = array();
 
         $attributes_groups = $product->getAttributesGroups($context->language->id);
-
         foreach($attributes_groups as $attribute_group) {
             if(!isset($product_attributes[$attribute_group['id_product_attribute']])) {
                 $product_attributes[$attribute_group['id_product_attribute']] = array();

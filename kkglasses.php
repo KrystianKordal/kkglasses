@@ -1,28 +1,4 @@
 <?php
-/**
-* 2007-2022 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2022 PrestaShop SA
-*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*/
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -47,7 +23,7 @@ class Kkglasses extends Module
         parent::__construct();
 
         $this->displayName = $this->l('Konfigurator okularów');
-        $this->description = $this->l('Pozwala na proste dostosowanie okularów ');
+        $this->description = $this->l('Pozwala na proste dostosowanie soczewek do oprawek');
 
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
@@ -59,6 +35,8 @@ class Kkglasses extends Module
         return parent::install() &&
         
             $this->registerHook('displayProductActions') &&
+            $this->registerHook('displayAdminProductsExtra') &&
+            $this->registerHook('actionProductSave') &&
             $this->registerHook('header');
     }
 
@@ -152,6 +130,43 @@ class Kkglasses extends Module
         foreach (array_keys($form_values) as $key) {
             Configuration::updateValue($key, Tools::getValue($key));
         }
+    }
+
+    public function hookDisplayAdminProductsExtra($params)
+    {
+        $id_use = Configuration::get('KKGLASSES_ATTR_USE', 0);
+        $id_type = Configuration::get('KKGLASSES_ATTR_TYPE', 0);
+        $id_thin = Configuration::get('KKGLASSES_ATTR_THIN', 0);
+
+        if(!$id_use || !$id_type || !$id_thin) {
+            return;
+        }
+
+        $attributes = array(
+            $id_use => AttributeGroup::getAttributes($this->context->language->id, $id_use),
+            $id_type => AttributeGroup::getAttributes($this->context->language->id, $id_type),
+            $id_thin => AttributeGroup::getAttributes($this->context->language->id, $id_thin),
+        );
+
+        $this->context->smarty->assign([
+            'attributes' => $attributes,
+            'id_use' => $id_use,
+            'id_type' => $id_type,
+            'id_thin' => $id_thin,
+            'id_product' => $params['id_product']
+        ]);
+
+        return $this->display(__FILE__, 'product_configure.tpl');
+    }
+
+    public function hookActionProductSave($params)
+    {
+        $form = Tools::getValue('kkglasses');
+        $id_product = Tools::getValue('form')['id_product'];
+
+        $id_creator_product = 0;
+
+        ProductConfiguration::save($id_product, $id_creator_product, $form);
     }
 
     public function hookDisplayProductActions($params)
