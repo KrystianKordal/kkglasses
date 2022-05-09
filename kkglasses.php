@@ -164,9 +164,7 @@ class Kkglasses extends Module
         $form = Tools::getValue('kkglasses');
         $id_product = Tools::getValue('form')['id_product'];
 
-        $id_creator_product = 0;
-
-        ProductConfiguration::save($id_product, $id_creator_product, $form);
+        ProductConfiguration::save($id_product, $form);
     }
 
     public function hookDisplayProductActions($params)
