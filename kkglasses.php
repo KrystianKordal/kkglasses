@@ -148,11 +148,15 @@ class Kkglasses extends Module
             $id_thin => AttributeGroup::getAttributes($this->context->language->id, $id_thin),
         );
 
+        $configuration = ProductConfiguration::getCreatorProductData($params['id_product']);
+
         $this->context->smarty->assign([
             'attributes' => $attributes,
             'id_use' => $id_use,
             'id_type' => $id_type,
             'id_thin' => $id_thin,
+            'type_data' => $configuration['type_data'],
+            'thin_data' => $configuration['thin_data'],
             'id_product' => $params['id_product']
         ]);
 
@@ -161,16 +165,20 @@ class Kkglasses extends Module
 
     public function hookActionProductSave($params)
     {
-        $form = Tools::getValue('kkglasses');
-        $id_product = Tools::getValue('form')['id_product'];
+        if (Tools::getIsset('kkglasses')) {
+            $form = Tools::getValue('kkglasses');
+            unset($_POST['kkglasses']);
+            $id_product = Tools::getValue('form')['id_product'];
 
-        ProductConfiguration::save($id_product, $form);
+            ProductConfiguration::save($id_product, $form);
+        }
     }
 
     public function hookDisplayProductActions($params)
     {
+        $id_creator_product = ProductConfiguration::getCreatorProductId($params['product']->id);
         $this->context->smarty->assign([
-            'button_url' => $this->context->link->getModuleLink('kkglasses', 'creator', ['id_product' => $params['product']->id])
+            'button_url' => $this->context->link->getModuleLink('kkglasses', 'creator', ['id_product' => $id_creator_product])
         ]);
         return $this->display(__FILE__, 'action_button.tpl');
     }

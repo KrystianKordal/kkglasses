@@ -34,7 +34,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'kkglasses_product` (
     `id_product` INT NOT NULL , 
     `id_creator_product` INT NOT NULL , 
     `type_data` TEXT NOT NULL , 
-    `thin_data` INT NOT NULL 
+    `thin_data` TEXT NOT NULL 
 ) ENGINE =' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
 foreach ($sql as $query) {
