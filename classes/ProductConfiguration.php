@@ -105,38 +105,63 @@ class ProductConfiguration
 
     protected static function createAllCombinations(Product $product, array $form)
     {
+        $id_use = Configuration::get('KKGLASSES_ATTR_USE');
         $id_type = Configuration::get('KKGLASSES_ATTR_TYPE');
         $id_thin = Configuration::get('KKGLASSES_ATTR_THIN');
-        foreach($form[$id_type] as $id_type_attribute => $type_value) {
-            foreach($form[$id_thin] as $id_thin_attribute => $thin_value) {
-                if(isset($type_value['active']) && isset($thin_value['active'])) {
-                    $combinationAttributes = array($id_type_attribute, $id_thin_attribute);
+        
+        $use_attributes = AttributeGroup::getAttributes(Context::getContext()->language->id, $id_use);
+        
+        foreach($use_attributes as $use_attribute) {
+            foreach($form[$id_type] as $id_type_attribute => $type_value) {
+                foreach($form[$id_thin] as $id_thin_attribute => $thin_value) {
+                    $combinationAttributes = array(
+                        $id_type_attribute, 
+                        $id_thin_attribute, 
+                        $use_attribute['id_attribute'],
+                    );
                     
-                    if(!$type_value['price'] || !$thin_value['price'])
-                        continue;
-
-                    if(!$product->productAttributeExists($combinationAttributes))
-                    {
-                        $price = $type_value['price'] + $thin_value['price'];
-                        $weight = 0;
-                        $ecotax = 0;
-                        $unit_price_impact="";
-                        $reference = "";
-                        $ean13 = "";
-                        $default = false;
-            
-                        $idProductAttribute = $product->addAttribute((float)$price, (float)$weight, $unit_price_impact, (float)$ecotax, "", strval($reference), strval($ean13), $default, NULL, NULL);
-            
-                        $combination = new Combination((int) $idProductAttribute);
-            
-                        $combination->setAttributes($combinationAttributes);
-                    }
+                    self::createCombination(
+                        $combinationAttributes,
+                        $type_value, 
+                        $thin_value,
+                        $product
+                    );
                 }
-
             }
         }
 
+
         return $product->id;
+    }
+
+    protected function createCombination(
+        $combinationAttributes,
+        $type_value,
+        $thin_value,
+        $product
+        ) {
+        if(isset($type_value['active']) && isset($thin_value['active'])) {
+
+            if(!$type_value['price'] || !$thin_value['price'])
+                return;
+
+            if(!$product->productAttributeExists($combinationAttributes))
+            {
+                $price = $type_value['price'] + $thin_value['price'];
+                $weight = 0;
+                $ecotax = 0;
+                $unit_price_impact="";
+                $reference = "";
+                $ean13 = "";
+                $default = false;
+    
+                $idProductAttribute = $product->addAttribute((float)$price, (float)$weight, $unit_price_impact, (float)$ecotax, "", strval($reference), strval($ean13), $default, NULL, NULL);
+    
+                $combination = new Combination((int) $idProductAttribute);
+    
+                $combination->setAttributes($combinationAttributes);
+            }
+        }
     }
 
     protected static function updateCreatorProduct(int $id_product, array $form) : int

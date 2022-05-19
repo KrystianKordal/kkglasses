@@ -2,6 +2,8 @@ $(document).ready(function() {
     useCardEvent();
     tooltipEvent();
     pdEvent();
+    calculatePriceEvent();
+    calculatePrice();
 });
 
 function useCardEvent() {
@@ -37,4 +39,29 @@ function pdEvent() {
         $('#pd_l').val(val);
         $('#pd_p').val(val);
     });
+}
+
+function calculatePriceEvent() {
+    $('.type-radio').on("change", calculatePrice);
+    $('.thin-radio').on("change", calculatePrice);
+}
+
+function calculatePrice() {
+    let type_price = $('.type-container input:checked').data('price');
+    let thin_price = $('.thin-container input:checked').data('price');
+
+    let frame_price = Number($('#frame_price').data('price'));
+    let lenses_price = Number(type_price + thin_price);
+    let total_price = Number(lenses_price + frame_price);
+
+    $('#lenses_price').html(formatPrice(lenses_price));
+    $('#total_price').html(formatPrice(total_price));
+}
+
+function formatPrice(price) {
+    let formatted_price = price.toFixed(2);
+    formatted_price = formatted_price.toString();
+    formatted_price = formatted_price.replace('.', ',');
+    formatted_price += " " + prestashop.currency.sign; 
+    return formatted_price;
 }
