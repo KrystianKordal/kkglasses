@@ -32,6 +32,7 @@ class Kkglasses extends Module
 
     public function install()
     {
+        require_once __DIR__ . '/sql/install.php';
         return parent::install() &&
         
             $this->registerHook('displayProductActions') &&

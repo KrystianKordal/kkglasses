@@ -30,7 +30,7 @@
 }
 
 .use-title {
-    color: black;
+    color: #3a3a3a;
     font-weight: bold;
 }
 
@@ -40,6 +40,7 @@
 
 .correction-row td {
     padding: 4px 2px;
+    
 }
 
 
@@ -80,8 +81,11 @@
 
 .spacing-radio {
     display: flex;
-    justify-content: space-evenly;
     margin: 20px 0;
+}
+
+.spacing-radio > div:first-child {
+    margin-right: 50px;
 }
 
 #different_spacing_container {
@@ -96,9 +100,10 @@
     border: solid 1px #aaa;
     border-radius: 4px;
     margin: 12px 0;
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
     justify-content: space-between;
+    width: 90%;
 }
 
 .type-card .card-radio {
@@ -109,11 +114,14 @@
 
 .type-card .card-description {
     width: 80%;
+    display: flex;
+    align-items: center;
 }
 
 .type-card .card-description p {
     color: #000;
     text-align: left;
+    margin-bottom: 0;
 }
 
 .type-card .card-price {
@@ -133,7 +141,7 @@
     top: 20px;
 }
 
-.creator-sidebar .product-cover {
+.creator-sidebar .creator-product-cover {
     display: block;
     margin: auto;
     width: 90%;
@@ -141,4 +149,120 @@
 
 .creator-sidebar h2 {
     text-align: center;
+}
+
+.card {
+    border: none;
+}
+
+.creator-sidebar {
+    border: 1px solid rgba(0,0,0,.125);
+    padding-top: 20px;
+    padding-right: 20px !important;
+    padding-bottom: 20px;
+    padding-left: 20px !important;
+    box-sizing: border-box;
+}
+
+.summary-row {
+    margin-bottom: 20px;
+    color: #3a3a3a;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-row.total {
+    margin-top: 40px;
+}
+
+.summary-row.total .summary-value {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.col-md-8 h2 {
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.kkglasses-card {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+button.btn.btn-primary.card-button {
+    padding: 5px 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.creator-section {
+    margin-bottom: 50px;
+}
+
+.correction-input {
+    width: 100%;
+}
+
+.correction-header {
+    padding-right: 10px !important;
+}
+
+.correction-table {
+    width: 56%;
+    display: block;
+}
+
+.correction-value-row {
+    width: 32%;
+    padding: 4px 8px !important;
+}
+
+input#pd_same {
+    width: 20%;
+}
+
+#different_spacing_container .spacing-input {
+    width: 50%;
+}
+
+#different_spacing_container td {
+    width: 260px;
+}
+
+.hahaha {
+    color: #3a3a3a;
+    margin-bottom: 20px;
+}
+
+.hahaha-container {
+    margin-top: 20px;
+}
+
+.spacing-radio input {
+    margin-right: 8px;
+}
+
+.hahaha-option {
+    margin: 0 6px;
+    border:1px solid rgba(0,0,0,.125);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.custom-checkbox + label {
+    width: calc(100% - 21px);
+}
+
+.conditions {
+    display: flex;
+    align-items: flex-start;
+}
+
+.conditions label {
+    text-align: left;
+    margin-left: 8px;
 }

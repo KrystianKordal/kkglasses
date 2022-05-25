@@ -1,1 +1,0 @@
-# Konfigurator okularów

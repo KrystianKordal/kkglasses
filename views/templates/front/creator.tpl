@@ -10,23 +10,25 @@
             {include file="`$partials_dir`spacing.tpl"}
             {include file="`$partials_dir`type.tpl"}
             {include file="`$partials_dir`thin.tpl"}
-            {include file="`$partials_dir`add_to_cart.tpl"}
         </div>
         <div class="col-md-4 creator-sidebar">
             <h2>{$product.name}</h2>
-            <img class="product-cover" src="{$product.image}">
+            <img class="creator-product-cover" src="{$product.image}">
             <div class="summary-row">
                 <span class="summary-title">Oprawki</span>
                 <span class="summary-value" id="frame_price" data-price="{$product.price_amount}">{$product.price}</span>
             </div>
+            <hr>
             <div class="summary-row">
                 <span class="summary-title">Soczewki</span>
                 <span class="summary-value" id="lenses_price"></span>
             </div>
-            <div class="summary-row">
+            <hr>
+            <div class="summary-row total">
                 <span class="summary-title">Suma</span>
                 <span class="summary-value" id="total_price"></span>
             </div>
+            {include file="`$partials_dir`add_to_cart.tpl"}
         </div>
     </div>
 </div>

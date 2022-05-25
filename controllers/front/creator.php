@@ -27,7 +27,7 @@ class KkGlassesCreatorModuleFrontController extends ModuleFrontController
             $this->module->l('Soczewki "zerówki" - bez korekcji, do noszenia jako modny dodatek')
         );
 
-        foreach ($product['attributes'][$id_use]['values'] as $id => $attribute) {
+        foreach ($product['attributes'][$id_use]['values'] ?? array() as $id => $attribute) {
             $product['attributes'][$id_use]['values'][$id]['desc'] = $texts[$index];
             $index++;
         }

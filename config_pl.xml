@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>kkglasses</name>
+    <displayName><![CDATA[Konfigurator okular&oacute;w]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Pozwala na proste dostosowanie soczewek do oprawek]]></description>
+    <author><![CDATA[Krystian Kordal]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

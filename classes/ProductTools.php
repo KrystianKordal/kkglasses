@@ -11,12 +11,23 @@ class ProductTools
         $product = new Product($id_product);
 
         $cover = $product->getCover($product->id);
+        if($cover) {
+            $link_rewrite = '';
+            if(isset($product->link_rewrite)) {
+                $link_rewrite = is_array($product->link_rewrite) ? array_shift($product->link_rewrite) : $product->link_rewrite;
+            } else {
+                $link_rewrite = $product->name;
+            }
+            
+            $image = $context->link->getImageLink(
+                $link_rewrite, 
+                $cover['id_image'], 
+                'large_default'  
+            );
+        } else {
+            $image = '';
+        }
 
-        $image = $context->link->getImageLink(
-            isset($product->link_rewrite) ? $product->link_rewrite : $product->name, 
-            $cover['id_image'], 
-            'large_default'  
-        );
         
         $template_product = array(
             'id_product' => $product->id,
