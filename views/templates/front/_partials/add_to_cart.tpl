@@ -3,11 +3,11 @@
 <p>{l s="Okulary korekcyjne (oprawka + soczewki korekcyjne) są produktem przygotowanym zgodnie z indywidualną potrzebą i według specyfikacji konsumenta, w związku z czym zgodnie z art. 38 pkt. 3 ustawy z dnia 30 maja 2014 roku o prawach konsumenta nie podlegają zwrotowi. Przed finalizacją zamówienia upewnij się, że wybrane przez Ciebie parametry są odpowiednie." d="Modules.KkGlasses.Creator"}</p>
 </div>
 <p class="conditions">
+    <label for="conditions">
     <span class="custom-checkbox">
         <input type="checkbox" id="conditions">
         <span><i class="material-icons rtl-no-flip checkbox-checked"></i></span>
-    </span>
-    <label for="conditions">{l s="Sprawdziłem dokładnie receptę i zapoznałem się z regulaminem" d="Modules.KkGlasses.Creator"}</label>
+    </span>{l s="Sprawdziłem dokładnie receptę i zapoznałem się z regulaminem" d="Modules.KkGlasses.Creator"}</label>
     <p class="conditions-error error-msg" style="display: none;">{l s="Musisz zaznaczyć opcję powyżej" d="Modules.KkGlasses.Creator"}</p>
 </p>
 <p>

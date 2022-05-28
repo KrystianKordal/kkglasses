@@ -2,14 +2,27 @@
 <h2>{l s="3. Rozstaw źrenic (PD)" d="Modules.KkGlasses.Creator"}</h2>
 <div class="kkglasses-spacing">
     <div class="spacing-radio">
-    <div>
-        <input type="radio" id="same_spacing" name="spacing_type" class="spacing-input" checked>
-        <label for="same_spacing">{l s="PD TAKIE SAMO DLA OBU OCZU" d="Modules.KkGlasses.Creator"}</label>
+    <div class='radio-container'>
+    {include 
+        file="`$partials_dir`radio-button.tpl" 
+        name="spacing_radio" 
+        idradio="same_spacing"
+        label="PD TAKIE SAMO DLA OBU OCZU" 
+        class="spacing-input"
+        checked="checked"
+        value=""}
     </div>
-    <div>
-        <input type="radio" id="different_spacing" name="spacing_type" class="spacing-input">
-        <label for="different_spacing">{l s="PD RÓŻNE DLA OBU OCZU" d="Modules.KkGlasses.Creator"}</label>
+    <div class='radio-container'>
+    {include 
+        file="`$partials_dir`radio-button.tpl" 
+        idradio="different_spacing"
+        name="spacing_radio" 
+        label="PD RÓŻNE DLA OBU OCZU" 
+        class="spacing-input"
+        checked=""
+        value=""}
     </div>
+
     </div>
     <div id="same_spacing_container" class="spacing-input-container">
         <input type="number" step="0.01" id="pd_same" class="spacing-input">
