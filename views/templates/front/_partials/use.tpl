@@ -5,7 +5,7 @@
             {foreach $product.attributes[$id_use].values key="attribute_id" item="attribute"}
             <label class="kkglasses-card" for="group_{$id_use}_{$attribute_id}">
                 <div>
-                    <input id="group_{$id_use}_{$attribute_id}" type="radio" name="group[{$id_use}]" value="{$attribute_id}">
+                    <input class="use-radio" id="group_{$id_use}_{$attribute_id}" type="radio" name="group[{$id_use}]" value="{$attribute_id}">
                     <p class="use-title">{$attribute.name}</p>
                     <p>{$attribute.desc nofilter}</p>
                 </div>
@@ -14,4 +14,5 @@
             {/foreach}
         {/if}
     </div>
+    <p class="error-msg use-error">{l s="Musisz wybrać jedną z opcji"}</p>
 </div>

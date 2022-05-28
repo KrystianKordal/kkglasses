@@ -8,8 +8,9 @@
         <span><i class="material-icons rtl-no-flip checkbox-checked"></i></span>
     </span>
     <label for="conditions">{l s="Sprawdziłem dokładnie receptę i zapoznałem się z regulaminem" d="Modules.KkGlasses.Creator"}</label>
-    <p class="conditions-error" style="display: none;">{l s="Musisz zaznaczyć opcję powyżej" d="Modules.KkGlasses.Creator"}</p>
+    <p class="conditions-error error-msg" style="display: none;">{l s="Musisz zaznaczyć opcję powyżej" d="Modules.KkGlasses.Creator"}</p>
 </p>
 <p>
     <button id="add_to_cart" class="btn btn-primary">{l s="Przejdź do kasy" d="Modules.KkGlasses.Creator"}</button>
+    <p class="all-error error-msg" style="display: none;">{l s="Konfiguracja zawiera błędy. Sprawdź wprowadzone wartości" d="Modules.KkGlasses.Creator"}</p>
 </p>

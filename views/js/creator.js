@@ -65,3 +65,4 @@ function formatPrice(price) {
     formatted_price += " " + prestashop.currency.sign; 
     return formatted_price;
 }
+

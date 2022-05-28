@@ -1,5 +1,6 @@
 <div class="creator-section">
     <h2>{l s="4. Wybierz typ soczewek korekcyjnych" d="Modules.KkGlasses.Creator"}</h2>
+    <p class="error-msg type-error">{l s="Musisz wybrać jedną z opcji"}</p>
     <div class="type-container">
         {if isset($product.attributes[$id_type])}
             {foreach $product.attributes[$id_type].values key="attribute_id" item="attribute"}

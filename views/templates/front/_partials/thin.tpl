@@ -24,4 +24,6 @@
         {/foreach}
     {/if}
 </div>
+{include file="`$partials_dir`radio-button.tpl"}
+<p class="error-msg thin-error">{l s="Musisz wybrać jedną z opcji"}</p>
 </div>

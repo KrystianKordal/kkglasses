@@ -158,7 +158,8 @@ class Kkglasses extends Module
             'id_thin' => $id_thin,
             'type_data' => $configuration['type_data'],
             'thin_data' => $configuration['thin_data'],
-            'id_product' => $params['id_product']
+            'id_product' => $params['id_product'],
+            'is_configurable' => ProductConfiguration::getCreatorProductId($params['id_product'])
         ]);
 
         return $this->display(__FILE__, 'product_configure.tpl');
@@ -166,7 +167,7 @@ class Kkglasses extends Module
 
     public function hookActionProductSave($params)
     {
-        if (Tools::getIsset('kkglasses')) {
+        if (Tools::getIsset('kkglasses') && isset(Tools::getValue('kkglasses')['is_configurable'])) {
             $form = Tools::getValue('kkglasses');
             unset($_POST['kkglasses']);
             $id_product = Tools::getValue('form')['id_product'];

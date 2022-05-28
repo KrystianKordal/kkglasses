@@ -41,5 +41,6 @@
         <td class="correction-value-row"><input type="number" step="0.01" id="axis_l" class="correction-input"></td>
     </tr>
     </table>
+    <p class="error-msg correction-error">Wartości nie są wprowadzone poprawnie</p>
 </div>
 </div>

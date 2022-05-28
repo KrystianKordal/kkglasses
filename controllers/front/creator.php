@@ -18,6 +18,10 @@ class KkGlassesCreatorModuleFrontController extends ModuleFrontController
             Tools::redirect('/');
         }
 
+        if(!Product::existsInDatabase(Tools::getValue('id_product'), 'product')) {
+            Tools::redirect('/');
+        }
+
         $product = ProductTools::getTemplateProduct(Tools::getValue('id_product'));
         
         $index = 0;

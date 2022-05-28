@@ -28,10 +28,13 @@ class ProductTools
             $image = '';
         }
 
+        $name = Product::getProductName($product->id);
+        $name = str_replace('+ soczewki', '', $name);
+
         
         $template_product = array(
             'id_product' => $product->id,
-            'name' => Product::getProductName($product->id),
+            'name' => $name,
             'image' => $image,
             'attributes' => self::getAttributes($product),
             'price' => self::formatPrice($product->price),

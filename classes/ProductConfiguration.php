@@ -99,8 +99,33 @@ class ProductConfiguration
 
         $product->save();
 
+        $stock_available_id = StockAvailable::getStockAvailableIdByProductId($product->id);
+        $stock_available = new StockAvailable($stock_available_id);
+        $stock_available->out_of_stock = 1;
+        $stock_available->save();
+
         Image::duplicateProductImages($id_product_old, $product->id, null);
+        
+        self::createProductCustomizationFields((int) $product->id);
         return self::createAllCombinations($product, $form);
+    }
+
+    protected static function createProductCustomizationFields(int $id_product)
+    {
+        $id_lang = Context::getContext()->language->id;
+        self::createCustomizationField($id_product, "Parametry korekcji", $id_lang);
+        self::createCustomizationField($id_product, "Rozstaw źrenic", $id_lang);
+    }
+
+    protected static function createCustomizationField($id_product, $name, $id_lang)
+    {
+        $field = new CustomizationField();
+        $field->id_product = $id_product;
+        $field->type = CustomizationField::TYPE_STRING;
+        $field->required = true;
+        $field->is_module = true;
+        $field->name[$id_lang] = $name;
+        $field->save();
     }
 
     protected static function createAllCombinations(Product $product, array $form)
@@ -138,7 +163,7 @@ class ProductConfiguration
         $combinationAttributes,
         $type_value,
         $thin_value,
-        $product
+        Product $product
         ) {
         if(isset($type_value['active']) && isset($thin_value['active'])) {
 
@@ -155,7 +180,7 @@ class ProductConfiguration
                 $ean13 = "";
                 $default = false;
     
-                $idProductAttribute = $product->addAttribute((float)$price, (float)$weight, $unit_price_impact, (float)$ecotax, "", strval($reference), strval($ean13), $default, NULL, NULL);
+                $idProductAttribute = $product->addAttribute((float)$price, (float)$weight, $unit_price_impact, (float)$ecotax, "", strval($reference), strval($ean13), $default, NULL, NULL, 1, [], null, 100);
     
                 $combination = new Combination((int) $idProductAttribute);
     

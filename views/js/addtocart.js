@@ -14,8 +14,11 @@ function addToCart(id_customization) {
     if(validateForm()) {
         let data = getAddToCartData(id_customization);
         $.ajax({
-            'url': 'http://ps78.local/index.php?controller=cart',
+            method: 'POST',
+            url: prestashop.urls.pages.cart,
             data: data
+        }).done(function(){
+            window.location.href = prestashop.urls.pages.cart;
         });
     }
 }
@@ -23,10 +26,41 @@ function addToCart(id_customization) {
 function validateForm() {
     let validForm = true;
 
-    $('.conditions-error').hide();
+    $('.error-msg').hide();
     if(!$('#conditions').prop('checked')) {
         $('.conditions-error').show();
         validForm = false;
+    }
+
+    if(!$('.type-radio:checked').length) {
+        $('.type-error').show();
+        validForm = false;
+    }  
+
+    if(!$('.use-radio:checked').length) {
+        $('.use-error').show();
+        validForm = false;
+    }  
+
+    if(!$('.thin-radio:checked').length) {
+        $('.thin-error').show();
+        validForm = false;
+    }  
+
+    $('.correction-input').each(function() {
+        if($(this).val() == '') {
+            $('.correction-error').show();
+            validForm = false;
+        }
+    })
+
+    if($('#pd_l').val() == '' || $('#pd_p').val() == '') {
+        $('.spacing-error').show();
+        validForm = false;
+    }
+
+    if(!validForm) {
+        $('.all-error').show();
     }
 
     return validForm;
@@ -50,7 +84,7 @@ function getAddToCartData(id_customization) {
             qty: 1,
             add: 1,
             action: 'update',
-            token: $('input[name=token]').val()
+            token: $('input[name=token]').val(),
         };
 }
 
@@ -58,9 +92,9 @@ function createCustomization() {
     return new Promise((resolve) => {
         $.ajax({
             method: 'POST',
-            url: 'http://ps78.local/index.php?controller=product',
+            url: prestashop.urls.pages.product,
             data: getCreateCustomizationData(),
-        }).done(function(res) {
+        }).always(function(res) {
             resolve(res);
         });
     });
@@ -86,7 +120,8 @@ function getCreateCustomizationData() {
         id_product: id_product,
         id_product_attribute: 0,   
         submitCustomizedData: 1,
-        token: $('input[name=token]').val()
+        token: $('input[name=token]').val(),
+        ajax: 1
     }
 
     let correction_str = getCorrectionStr();

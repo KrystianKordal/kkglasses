@@ -27,14 +27,15 @@
                 </td>
             </tr>
         </table>
-
+    
     </div>
+    <p class="error-msg spacing-error">Wartości nie są wprowadzone poprawnie</p>
     <div class="hahaha-container">
         <div class="hahaha">{l s="Jak zmierzyć PD?" d="Modules.KkGlasses.Creator"}</div>
-        <a href="#" class="hahaha-option">{l s="Aplikacja na smartfon" d="Modules.KkGlasses.Creator"}</a>
-        <a href="#" class="hahaha-option">{l s="Zmierz online" d="Modules.KkGlasses.Creator"}</a>
-        <a href="#" class="hahaha-option">{l s="Pomiar linijką" d="Modules.KkGlasses.Creator"}</a>
-        <a href="#" class="hahaha-option">{l s="Jak przeczytać receptę" d="Modules.KkGlasses.Creator"}</a>
+        <a href="#" class="hahaha-option">{l s="Aplikacja na smartfon"|replace:" ":"&nbsp;" d="Modules.KkGlasses.Creator"}</a>
+        <a href="#" class="hahaha-option">{l s="Zmierz online"|replace:" ":"&nbsp;" d="Modules.KkGlasses.Creator"}</a>
+        <a href="#" class="hahaha-option">{l s="Pomiar linijką"|replace:" ":"&nbsp;" d="Modules.KkGlasses.Creator"}</a>
+        <a href="#" class="hahaha-option">{l s="Jak przeczytać receptę"|replace:" ":"&nbsp;" d="Modules.KkGlasses.Creator"}</a>
     </div>
 </div>
 </div>
