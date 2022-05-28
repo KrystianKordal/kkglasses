@@ -11,7 +11,9 @@
                         label=$attribute.name
                         class="type-radio"
                         checked="{if $attribute@first}checked{else}{/if}"
-                        value=$attribute_id}
+                        value=$attribute_id
+                        extracontent="data-price=`$attribute.price_amount`"
+                        }
                     <div class="card-price">
                         +&nbsp;{$attribute.price}
                     </div>
