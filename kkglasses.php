@@ -14,7 +14,7 @@ class Kkglasses extends Module
     {
         $this->name = 'kkglasses';
         $this->tab = 'administration';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'Krystian Kordal';
         $this->need_instance = 0;
 

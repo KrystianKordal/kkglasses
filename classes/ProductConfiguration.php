@@ -2,8 +2,8 @@
 
 class ProductConfiguration
 {   
-    protected static string $table = 'kkglasses_product';
-    protected static string $prefix_table = _DB_PREFIX_ . 'kkglasses_product';
+    protected static $table = 'kkglasses_product';
+    protected static $prefix_table = _DB_PREFIX_ . 'kkglasses_product';
 
     public static function save(int $id_product, array $form)
     {
